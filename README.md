@@ -29,34 +29,32 @@ Unfortunately, it does not even look like the humble octothorpe is in the right 
 
 
 ###Spaces Guess
-Next I decided to look for spaces.  There will most likely be spaces in this sort of message, and if not exactly spaces, something similar.  Dots have been used in previous examples so they were chosen for this guess.  This [website](http://en.wikipedia.org/wiki/ASCII#mediaviewer/File:ASCII_Code_Chart-Quick_ref_card.png) had the list of what the codes are for characters.  Dots/spaces turned out to be 0x20.  Since spaces are normally used a lot, I figured that the most common hex numbers that showed up must correspond to spaces.  The most common left and right bits are shown below: 
+Next I decided to look for spaces.  There will most likely be spaces in this sort of message, and if not exactly spaces, something similar.  Dots have been used in previous examples so they were chosen for this guess.  This [website](http://en.wikipedia.org/wiki/ASCII#mediaviewer/File:ASCII_Code_Chart-Quick_ref_card.png) had the list of what the codes are for characters.  Dots/spaces turned out to be 0x20.  Since spaces are normally used a lot, I figured that the most common hex numbers that showed up must correspond to spaces.  The hex left and right bits are shown below:
 
 
 
 
-|hex(left)	|dec(left)|	hex(right)|		dec(right)|	
-|------|-------|-------|-------|
-|35|		53	|	90|		144|	
-|0|		0	|	90	|	144|
-|1	|	1|		90	|	144|
-|12|		18|		90|		144|
-|12|		18|		9e|		158|
-|16|		22|		9E|		158|
-|16|		22|		C8|		200|
-|16|		22|		ca|		202|
-|17|		23|		CA|		202|
-|17|		23|		CC|		204|
-|17|		23|		D0|		208|
-|32|		50|		D1|		209|
-|53|		83|		D1|		209|
-|53|		83|		D2|		210|
-|53|		83|		D7|		215|
-|0A|		10|		D9|		217|
-|1C|		28|		db|		219|
-|1C|		28|		df|		223|
-|3d|		61|		F8|		248|
-|5d|		93|		F9|		249|
-|5D|		93|		F9|		249|
+***add picture of table 
+
+On the right side 90 seems to be the most common. On the left side, there seems to be a tie between 16,17, and 53.  These numbers XORed with 20 is shown below:
+
+Message|XOR w/ 0x20| Key
+---|---|---
+0x16|0x20|0x36
+0x17|0x20|0x37
+0x53|0x20|0x73
+0x90|0x20|0xb0
+
+Therefore, the keys 0x36, 0x90; 0x37, 0x90; and 0x73, 0x90 were tried next.  
+
+
+
+**0x36, 0x90** Guess
+
+**0x37, 0x90** Guess
+
+**0x73, 0x90** Guess
+
 
 
 
