@@ -20,7 +20,7 @@ This was the answer that resulted:
 ```
 0x0200      0	l	.	y	X	-	8	h	.	y	X	-	7	{	.
 0x020F      .	.	j	.	#	V	K	.	d	.	c	.	a	.	#
-0x21E       V	J	.	b	.	#	V	J	.	b	.	#	.	.	E
+0x021E       V	J	.	b	.	#	V	J	.	b	.	#	.	.	E
 
 ```
 
