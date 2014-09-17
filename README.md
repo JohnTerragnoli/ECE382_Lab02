@@ -24,7 +24,7 @@ This was the answer that resulted:
 
 ```
 
-The last octothorpe on the last line signifies the end of the message, since it is at 0x022A.  
+Unfortunately, it does not even look like the humble octothorpe is in the right spot. 
 
 
 
