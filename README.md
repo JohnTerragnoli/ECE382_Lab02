@@ -51,9 +51,25 @@ Therefore, the keys 0x36, 0x90; 0x37, 0x90; and 0x73, 0xB0 were tried next.
 
 **0x36, 0xB0** Guess
 
+0x0200  .	o	6	z	k	.	.	k	$	z	k	.	.	x	.
+0x020F  |	$	i	.	.	e	H	7	g	.	`	!	b	<	.
+0x021E   e	I	*	a	!	.	e	I	*	a	!	.	5	.	v
+
+
 **0x37, 0xB0** Guess
 
+0x0200  .	o	7	z	j	.	.	k	%	z	j	.	.	x	!
+0x020F  |	%	i	!	.	d	H	6	g	!	`	.	b	=	.
+0x021E  d	I	+	a	.	.	d	I	+	a	.	.	4	.	w
+
+
 **0x73, 0xB0** Guess
+
+0x0200  F	o	s	z	.	.	N	k	a	z	.	.	A	x	e
+0x020F  |	a	i	e	.	.	H	r	g	e	`	d	b	y	.
+0x021E  .	I	o	a	d	.	.	I	o	a	d	.	p	.	3
+
+It's getting really close!! At least answer looks like its in the form of words.  
 
 
 
