@@ -35,6 +35,7 @@ Next I decided to look for spaces.  There will most likely be spaces in this sor
 
 
 |hex(left)	|dec(left)|	hex(right)|		dec(right)|	
+|------|-------|-------|-------|
 |35|		53	|	90|		144|	
 |0|		0	|	90	|	144|
 |1	|	1|		90	|	144|
