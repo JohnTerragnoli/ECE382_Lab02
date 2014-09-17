@@ -31,29 +31,7 @@ Unfortunately, it does not even look like the humble octothorpe is in the right 
 ###Spaces Guess
 Next I decided to look for spaces.  There will most likely be spaces in this sort of message, and if not exactly spaces, something similar.  Dots have been used in previous examples so they were chosen for this guess.  This [website](http://en.wikipedia.org/wiki/ASCII#mediaviewer/File:ASCII_Code_Chart-Quick_ref_card.png) had the list of what the codes are for characters.  Dots/spaces turned out to be 0x20.  Since spaces are normally used a lot, I figured that the most common hex numbers that showed up must correspond to spaces.  The most common left and right bits are shown below: 
 
-```
-hex(left)	dec(left)
-35      	53
-0	        0
-1	        1
-12	      18
-12	      18
-16	      22
-16	      22
-16	      22
-17	      23
-17	      23
-17	      23
-32	      50
-53	      83
-53	      83
-53	      83
-0A	      10
-1C	      28
-1C	      28
-3d	      61
-5d	      93
-5D	      93
+
 
 
 hex(left)	|dec(left)|	hex(right)|		dec(right)
@@ -79,8 +57,6 @@ hex(left)	|dec(left)|	hex(right)|		dec(right)
 5d|		93|		F9|		249
 5D|		93|		F9|		249
 
-  
-```
 
 
 
