@@ -33,7 +33,7 @@ Next I decided to look for spaces.  There will most likely be spaces in this sor
 
 
 ![alt tag](https://raw.githubusercontent.com/JohnTerragnoli/ECE382_Lab02/master/2Left%20and%20Right%20smallest%20to%20largest.PNG "Right and Left Bytes")
-These are a list of all of the bytes in the message.  They are separated into right and left, because each side will share a commond byte key.  They have been rearranged in order from smallest to largest to see which bytes occur the most often.  
+This is a list of all of the bytes in the message.  They are separated into right and left, because each side will share a commond byte key.  They have been rearranged in order from smallest to largest to see which bytes occur the most often.  
 
 On the right side 90 seems to be the most common. On the left side, there seems to be a tie between 16,17, and 53.  These numbers XORed with 20 is shown below:
 
