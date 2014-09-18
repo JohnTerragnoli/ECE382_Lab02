@@ -32,9 +32,8 @@ Unfortunately, it does not even look like the humble octothorpe is in the right 
 Next I decided to look for spaces.  There will most likely be spaces in this sort of message, and if not exactly spaces, something similar.  Dots have been used in previous examples so they were chosen for this guess.  This [website](http://en.wikipedia.org/wiki/ASCII#mediaviewer/File:ASCII_Code_Chart-Quick_ref_card.png) had the list of what the codes are for characters.  Dots/spaces turned out to be 0x20.  Since spaces are normally used a lot, I figured that the most common hex numbers that showed up must correspond to spaces.  The hex left and right bits are shown below:
 
 
-
-
-***add picture of table 
+![alt tag](https://raw.githubusercontent.com/JohnTerragnoli/ECE382_Lab02/master/2Left%20and%20Right%20smallest%20to%20largest.PNG "Right and Left Bytes")
+These are a list of all of the bytes in the message.  They are separated into right and left, because each side will share a commond byte key.  They have been rearranged in order from smallest to largest to see which bytes occur the most often.  
 
 On the right side 90 seems to be the most common. On the left side, there seems to be a tie between 16,17, and 53.  These numbers XORed with 20 is shown below:
 
