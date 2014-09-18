@@ -79,6 +79,32 @@ Message|XOR w/ 0x20| Key
 0x1C|0x20|0x3C
 0x5D|0x20|0x7D
 
+These cases were then attempted.  
+
+**0x32, 0xB0** Guess
+```
+0x0200  .	o	2	z	o	.	.	k	.	z	o	.	.	x	$
+0x020F  |	.	i	$	.	a	H	3	g	$	`	%	b	8	.
+0x021E	a	I	.	a	%	.	a	I	.	a	%	.	1	.	r
+
+```
+
+**0x3C, 0xB0** Guess
+```
+0x0200  .	o	<	z	a	.	.	k	.	z	a	.	.	x	*
+0x020F  |	.	i	*	.	o	H	=	g	*	`	+	b	6	.
+0x021E	I	.	a	+	.	o	I	.	a	+	.	?	.	|
+
+```
+
+**0x7D, 0xB0** Guess
+```
+0x0200  .	o	<	z	a	.	.	k	.	z	a	.	.	x	*
+0x020F  |	.	i	*	.	o	H	=	g	*	`	+	b	6	.
+0x021E  o	I	.	a	+	.	o	I	.	a	+	.	?	.	|
+
+```
+
 
 
 
