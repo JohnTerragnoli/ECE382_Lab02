@@ -104,7 +104,7 @@ These cases were then attempted.
 0x021E  o	I	.	a	+	.	o	I	.	a	+	.	?	.	|
 ```
 
-Based on these last three findings it looks like the trend it moving away from correct.  Therfore, I'm going to revert back to the guess I made with 0x73, 0xB0, which looked pretty close.  I'm going to replace 0x90 with the next most common bytes in the odds.  Each of these bytes have two occurances: 0x9E, 0xD1, 0xF9.  These will be the next three trials then.  
+Based on these last three findings it looks like the trend it moving away from correct.  Therfore, I'm going to revert back to the guess I made with 0x73, 0xB0, which looked pretty close.  It looks like it forms words and it is the closest guess with almost all letters.  I'm going to replace 0x90 with the next most common bytes in the odds.  Each of these bytes have two occurances: 0x9E, 0xD1, 0xF9.  These will be the next three trials then.  
 
 
 
@@ -115,7 +115,7 @@ Based on these last three findings it looks like the trend it moving away from c
 0x021E  .	g	o	O	d	.	.	g	o	O	d	.	p	.	3
 ```
 
-Now we're in familiar territory!  With this first guess, I went no further because it looks like the answer.  Therefore, the key 0x73, 0x9E looks like it is the right answer.  
+Now we're in familiar territory!  With this first guess, I went no further because it looks like the answer.  Therefore, the key 0x73, 0x9E looks like it is the right key for the message.    
 
 
 
