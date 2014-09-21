@@ -20,7 +20,7 @@ In order to perform the basic functionality, the problem was broken down into sm
 
 Next, the subroutine decryptCharacter was created.  The whole point of this was to bring in a byte, XOR that byte with another byte, and then store the answer.  This was tested by hardcoding and moving/XORing byte into a register.  This was done for several cases just to make sure that the XORing process was working correctly.  It did work correctly. 
 
-Then the subroutine decryptMessage was created.  The point of this subroutine is to step through the message and send one byte at a time through the subroutine decryptCharacter.  In order to test that decryptMessage was stepping through correctly, I had the subroutine only read from the location in memeory and rewrite the coded message into the answer location.  It did work correctly.  Also, a creative way to had to be determined for finding the end of the message.  It was noted that the basic message ended in 0x8f, and that byte was found no where else in the message.  Therefore, when this byte was found the end of the message was found.  I then tested the program again to make sure that it stopped at the correct place.  Then, instead of writing the original message to the answer location, the decryptCharacter subroutie was utilized to decode each bit.  To check the answer, the location 0x0200 was viewed and the data type changed to be "character".  The following message was displayed.  
+Then the subroutine decryptMessage was created.  The point of this subroutine is to step through the message and send one byte at a time through the subroutine decryptCharacter.  Each iteration through decryptMessage calls decryptCharacter.  In order to test that decryptMessage was stepping through correctly, I had the subroutine only read from the location in memeory and rewrite the coded message into the answer location.  It did work correctly.  Also, a creative way to had to be determined for finding the end of the message.  It was noted that the basic message ended in 0x8f, and that byte was found no where else in the message.  Therefore, when this byte was found the end of the message was found.  I then tested the program again to make sure that it stopped at the correct place.  Then, instead of writing the original message to the answer location, the decryptCharacter subroutie was utilized to decode each bit.  To check the answer, the location 0x0200 was viewed and the data type changed to be "character".  The following message was displayed.  
 
 
 **Basic Functionality Answer**
@@ -38,16 +38,29 @@ After this was done, B Functionality was achieved.  To do this, the program was 
 
 The first problem to solve was to figure out how long the key was.  This was tried a couple of different ways.  First, I just assumed that the first byte of the message was going to be 0xf8.  This would work for B functionality, since there are no bytes in the rest of the message or the key of 0xf8.  However, this is not compatable with A Functionality, which I knew I was going to have to work eventually.  So I decided to set up a marker byte.  I chose 0x02, since this byte was neither in in any of the messages or the key.  
 
-##How the Marker Works
+**How the Marker Works**
 The key and the message are written in the code at the beginning.  This places them into ROM, specifically at 0xC000, one right after the other in whatever order they are written.  I chose to write the key before the message, but it could be done either way.  Therefore, the marker was written right in between them.  This can be seen in the [final code](https://raw.githubusercontent.com/JohnTerragnoli/ECE382_Lab02/master/1.1main.asm).  Since it is known that the key will start at exactly 0xC000, I started reading it from this address and stepped through ROM until I found the marker byte.  The address right before the marker byte was marked as the end of the key, which was stored in another register.  Once the beginning and the end of the key were known and stored separate registers, then the key itself can be stepped through during the decryption process and reset to the beginning of the key once the program has reached the end of the key.  Also, during this process of finding the key length, the beginning of the message is found and stored in a register.  The subroutine that found the length of the key, as well as the location of the beginning of the message is called "findKeyLength."  It was put into a subroutine so that the specifics of the code could be hidden once it was figured out, and then the simple command could just be called from the main section of code.  
 
+**KeyLength Problems**
 During this process I encountered a few problems.  The first one was rather simple but it took me a few minutes to figure out.  I forgot to increment the message starting point and decrement the key ending point in "findKeyLength".  This needed to be done because of the marker taking up one space inbetween the two and the subroutine ends when it finds the counter.  Therefore, I was getting some really weird messages at the end.  To fix this problem, I decided to check the most recent code I just created.  This was the findKeyLength subroutine.  I stepped through the program and watched the registers and realized that the key end point and the messge start point were off by one.  This helped me realize the root problem so that i could fix it.  
 
+**Looping through the Key**
 Also, I created the registers key_counter, to keep track of what point in the key I am currently working on and when it needs to return to the beginning of the key, and also the key_part, which stored the byte value of that part of the key for the XORing process.  The numberical value for the key length was stored in the register key_length.  
 
 After knowing the needed started values, I cam up with a way to step through and restart the key at the same time I was stepping through the message.  I decided that the best way to do this was in the decryptCharacter subroutine, where I would check if the key_counter equaled the key_length.  If it did, then I would reset the key_part to be referenced at 0xC000, and continue on in the XORing process.  If it did not, then I would XOR the key_part with the message and store the result as usual, and then increment where key_part was referenced.  
 
-As with basic functionality, 0x8F was the last byte in the message, and it was found no where else in the program.  Therefore, when the program comes across 0x8F, the program XORs that last byte and then jumps to an infinite loop.  
+
+**Ending the Program**
+As with basic functionality, 0x8F was the last byte in the message, and it was found no where else in the program.  Therefore, when the program comes across 0x8F, the program XORs that last byte and then jumps to an infinite loop.  The message that came up after the decoding was: 
+
+```
+0x0200  T	h	e	.	m	e	s	s	a	g	e	.	k	e	y	.	l	e	n	g	t	h	.	i	s	.
+0x021A  1	6	.	b	i	t	s	.	.	.	I	t	.	o	n	l	y	.	c	o	n	t	a	i	n	s
+0x0234  .	l	e	t	t	e	r	s	,	.	p	e	r	i	o	d	s	,	.	a	n	d	.	s	p	a
+0x024E  c	e	s	#	n	c	t	i	o	n	a	l	i	t	y	#	.	.	7	.	.	.	.	.	.	.
+```
+
+This is the right answer.  It was also very helpful because it gave a hint towards solving A Functionality, a problem that was tackeled below.  
 
 
 #A Functionality
