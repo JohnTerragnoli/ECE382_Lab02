@@ -208,3 +208,4 @@ Now we're in familiar territory!  With this first guess, I went no further becau
 
 #Documentation: 
 Used this website to check if my [XORing](http://www.miniwebtool.com/bitwise-calculator/?data_type=16&number1=CB&number2=CA&operator=XOR) was correct.  This was done until I realized that the right answer actually spelled out an answer in characters.  
+C2C Sabin Park recommended that I start looking for an octothorpe.  This is where I started for A Functionality, even though it was a dead end.  
