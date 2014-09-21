@@ -23,10 +23,22 @@ Next, the subroutine decryptCharacter was created.  The whole point of this was 
 Then the subroutine decryptMessage was created.  The point of this subroutine is to step through the message and send one byte at a time through the subroutine decryptCharacter.  In order to test that decryptMessage was stepping through correctly, I had the subroutine only read from the location in memeory and rewrite the coded message into the answer location.  It did work correctly.  Also, a creative way to had to be determined for finding the end of the message.  It was noted that the basic message ended in 0x8f, and that byte was found no where else in the message.  Therefore, when this byte was found the end of the message was found.  I then tested the program again to make sure that it stopped at the correct place.  Then, instead of writing the original message to the answer location, the decryptCharacter subroutie was utilized to decode each bit.  To check the answer, the location 0x0200 was viewed and the data type changed to be "character".  The following message was displayed.  
 
 
-**basic functionality answer**
+**Basic Functionality Answer**
 
+0x0200  C	o	n	g	r	a	t	u	l	a	t	i	o	n	s	!	.	.	Y	o	u	.	d	e	c	r
+0x021A  y	p	t	e	d	.	t	h	e	.	E	C	E	3	8	2	.	h	i	d	d	e	n	.	m	e
+0x0234  s	s	a	g	e	.	a	n	d	.	a	c	h	i	e	v	e	d	.	r	e	q	u	i	r	e
+0x024E  d	.	f	u	n	c	t	i	o	n	a	l	i	t	y	#	.	.	7	.	.	.	.	.	.	.
 
-After this was done, basic functionality was complete.  
+This is correct and therefore basic functionality was achieved.  
+
+#B Functionality
+After this was done, B Functionality was achieved.  To do this, the program was supposed to work regardless of how long the key was.  Several changes were done with the code to ensure that it handled this new capability and that it was still backwards compatable with basic functionality.  
+
+The first problem to solve was to figure out how long the key was.  This was tried a couple of different ways.  First, I just assumed that the first byte of the message was going to be 0xf8.  This would work for B functionality, since there are no bytes in the rest of the message or the key of 0xf8.  However, this is not compatable with A Functionality, which I knew I was going to have to work eventually.  So I decided to set up a marker byte.  I chose 0x02, since this byte was neither in in any of the messages or the key.  
+
+##How the Marker Works
+The key and the message are written in the code at the beginning.  This places them into ROM, specifically at 0xC000, one right after the other in whatever order they are written.  I chose to write the key before the message, but it could be done either way.  Therefore, the marker was written right in between them.  This can be seen in the [final code](https://raw.githubusercontent.com/JohnTerragnoli/ECE382_Lab02/master/1.1main.asm).  Since it is known that the key will start at exactly 0xC000, I started reading it from this address and stepped through ROM until I found the marker byte.  The address right before the marker byte was marked as the end of the key, which was stored in another register.  Once the beginning and the end of the key were known and stored separate registers, then the key itself can be stepped through during the decryption process and reset to the beginning of the key once the program has reached the end of the key.  Also, during this process of finding the key length, the beginning of the message is found and stored in a register.  The subroutine that found the length of the key, as well as the location of the beginning of the message is called "findKeyLength."  It was put into a subroutine so that the specifics of the code could be hidden once it was figured out, and then the simple command could just be called from the main section of code.  
 
 #A Functionality
 ##The Struggle/Process/Reasoning
