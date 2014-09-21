@@ -2,7 +2,15 @@ ECE382_Lab02
 ============
 
 #Purpose:
-The purpose of this lab is to create an assembly code program that decodes bytes into a readable message given a message and a key.  Using a key, each byte of the coded message will be XORed with the key, or a part of the key, in order to find out the answer.  At first the key was only one byte long, but then the program was altered so that keys of arbirary length can be used.  The final code for this project can be seen [here]().  
+The purpose of this lab is to create an assembly code program that decodes bytes into a readable message given a message and a key.  Using a key, each byte of the coded message will be XORed with the key, or a part of the key, in order to find out the answer.  At first the key was only one byte long, but then the program was altered so that keys of arbirary length can be used.  The final code for this project can be seen [here](https://raw.githubusercontent.com/JohnTerragnoli/ECE382_Lab02/master/1.1main.asm).  
+
+After this was finished, a coded method was given without a key.  In order to find the answer, then, the key had to be guessed.  The process for guessing this key can be found under the section "A Functionality".  
+
+#Prelab:
+
+Before any coding was done in Code Composer Studio, a flow chart was made depicting the big idea of what the program should do.  This was done in pseudocode.  This picture can be seen below.
+
+
 
 
 
