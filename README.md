@@ -11,7 +11,7 @@ After this was finished, a coded method was given without a key.  In order to fi
 Before any coding was done in Code Composer Studio, a flow chart was made depicting the big idea of what the program should do.  This was done in pseudocode.  This picture can be seen below.
 
 
-**prelat schematic**
+**prelab schematic**
 
 
 
@@ -24,11 +24,12 @@ Then the subroutine decryptMessage was created.  The point of this subroutine is
 
 
 **Basic Functionality Answer**
-
+```
 0x0200  C	o	n	g	r	a	t	u	l	a	t	i	o	n	s	!	.	.	Y	o	u	.	d	e	c	r
 0x021A  y	p	t	e	d	.	t	h	e	.	E	C	E	3	8	2	.	h	i	d	d	e	n	.	m	e
 0x0234  s	s	a	g	e	.	a	n	d	.	a	c	h	i	e	v	e	d	.	r	e	q	u	i	r	e
 0x024E  d	.	f	u	n	c	t	i	o	n	a	l	i	t	y	#	.	.	7	.	.	.	.	.	.	.
+```
 
 This is correct and therefore basic functionality was achieved.  
 
@@ -39,6 +40,15 @@ The first problem to solve was to figure out how long the key was.  This was tri
 
 ##How the Marker Works
 The key and the message are written in the code at the beginning.  This places them into ROM, specifically at 0xC000, one right after the other in whatever order they are written.  I chose to write the key before the message, but it could be done either way.  Therefore, the marker was written right in between them.  This can be seen in the [final code](https://raw.githubusercontent.com/JohnTerragnoli/ECE382_Lab02/master/1.1main.asm).  Since it is known that the key will start at exactly 0xC000, I started reading it from this address and stepped through ROM until I found the marker byte.  The address right before the marker byte was marked as the end of the key, which was stored in another register.  Once the beginning and the end of the key were known and stored separate registers, then the key itself can be stepped through during the decryption process and reset to the beginning of the key once the program has reached the end of the key.  Also, during this process of finding the key length, the beginning of the message is found and stored in a register.  The subroutine that found the length of the key, as well as the location of the beginning of the message is called "findKeyLength."  It was put into a subroutine so that the specifics of the code could be hidden once it was figured out, and then the simple command could just be called from the main section of code.  
+
+During this process I encountered a few problems.  The first one was rather simple but it took me a few minutes to figure out.  I forgot to increment the message starting point and decrement the key ending point in "findKeyLength".  This needed to be done because of the marker taking up one space inbetween the two and the subroutine ends when it finds the counter.  Therefore, I was getting some really weird messages at the end.  To fix this problem, I decided to check the most recent code I just created.  This was the findKeyLength subroutine.  I stepped through the program and watched the registers and realized that the key end point and the messge start point were off by one.  This helped me realize the root problem so that i could fix it.  
+
+Also, I created the registers key_counter, to keep track of what point in the key I am currently working on and when it needs to return to the beginning of the key, and also the key_part, which stored the byte value of that part of the key for the XORing process.  The numberical value for the key length was stored in the register key_length.  
+
+After knowing the needed started values, I cam up with a way to step through and restart the key at the same time I was stepping through the message.  I decided that the best way to do this was in the decryptCharacter subroutine, where I would check if the key_counter equaled the key_length.  If it did, then I would reset the key_part to be referenced at 0xC000, and continue on in the XORing process.  If it did not, then I would XOR the key_part with the message and store the result as usual, and then increment where key_part was referenced.  
+
+As with basic functionality, 0x8F was the last byte in the message, and it was found no where else in the program.  Therefore, when the program comes across 0x8F, the program XORs that last byte and then jumps to an infinite loop.  
+
 
 #A Functionality
 ##The Struggle/Process/Reasoning
