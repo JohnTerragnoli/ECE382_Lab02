@@ -11,9 +11,22 @@ After this was finished, a coded method was given without a key.  In order to fi
 Before any coding was done in Code Composer Studio, a flow chart was made depicting the big idea of what the program should do.  This was done in pseudocode.  This picture can be seen below.
 
 
+**prelat schematic**
 
 
 
+#Basic Functionality:
+In order to perform the basic functionality, the problem was broken down into smaller parts.  First, a few lines of code were created that were meant to pull the address of where the message, where the key was from memory, and where the answer will be written.  The key and the message were in ROM, which starts at 0xC000 and the answer was written in 0x0200.  For basic functionality this was easy because the key length was knew to be one, so these addresses could be hardcoded.  A launch was done to ensure that the program was receiving these numbers correctly.  It worked correctly.  
+
+Next, the subroutine decryptCharacter was created.  The whole point of this was to bring in a byte, XOR that byte with another byte, and then store the answer.  This was tested by hardcoding and moving/XORing byte into a register.  This was done for several cases just to make sure that the XORing process was working correctly.  It did work correctly. 
+
+Then the subroutine decryptMessage was created.  The point of this subroutine is to step through the message and send one byte at a time through the subroutine decryptCharacter.  In order to test that decryptMessage was stepping through correctly, I had the subroutine only read from the location in memeory and rewrite the coded message into the answer location.  It did work correctly.  Also, a creative way to had to be determined for finding the end of the message.  It was noted that the basic message ended in 0x8f, and that byte was found no where else in the message.  Therefore, when this byte was found the end of the message was found.  I then tested the program again to make sure that it stopped at the correct place.  Then, instead of writing the original message to the answer location, the decryptCharacter subroutie was utilized to decode each bit.  To check the answer, the location 0x0200 was viewed and the data type changed to be "character".  The following message was displayed.  
+
+
+**basic functionality answer**
+
+
+After this was done, basic functionality was complete.  
 
 #A Functionality
 ##The Struggle/Process/Reasoning
