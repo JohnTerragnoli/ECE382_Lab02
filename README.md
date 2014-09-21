@@ -10,8 +10,8 @@ After this was finished, a coded method was given without a key.  In order to fi
 
 Before any coding was done in Code Composer Studio, a flow chart was made depicting the big idea of what the program should do.  This was done in pseudocode.  This picture can be seen below.
 
+![alt tag](https://raw.githubusercontent.com/JohnTerragnoli/ECE382_Lab02/master/2Left%20and%20Right%20smallest%20to%20largest.PNG "Prelab Flowchart")
 
-**prelab schematic**
 
 
 
@@ -27,8 +27,14 @@ Next, the subroutine decryptCharacter was created.  The whole point of this was 
 Then the subroutine decryptMessage was created.  The point of this subroutine is to step through the message and send one byte at a time through the subroutine decryptCharacter.  Each iteration through decryptMessage calls decryptCharacter.  In order to test that decryptMessage was stepping through correctly, I had the subroutine only read from the location in memeory and rewrite the coded message into the answer location.  It did work correctly.  
 
 **Finding End**
-Also, a creative way to had to be determined for finding the end of the message.  It was noted that the basic message ended in 0x8f, and that byte was found no where else in the message.  Therefore, when this byte was found the end of the message was found.  I then tested the program again to make sure that it stopped at the correct place.  Then, instead of writing the original message to the answer location, the decryptCharacter subroutine was utilized to decode each bit.  To check the answer, the location 0x0200 was viewed and the data type changed to be "character".  The following message was displayed.  
+Also, a creative way to had to be determined for finding the end of the message.  It was noted that the basic message ended in 0x8f, and that byte was found no where else in the message.  Therefore, when this byte was found the end of the message was found.  I then tested the program again to make sure that it stopped at the correct place.  Then, instead of writing the original message to the answer location, the decryptCharacter subroutine was utilized to decode each bit.  To check the answer, the location 0x0200 was viewed and the data type changed to be "character".   
 
+**Issues/Debuggin**
+The largest issue that came up when I was working on the basic functionality was that the last byte was not getting decoded properly, although I didn't know this at the time.  I figured this out because I could not find the correct last answer byte anywhere near 0x0200.  It left me to wonder if anything was changing at all.  As a result, I went through a good deal of the results and checked them to make sure they were correct, which spent a lot of time.  I eventually ran some random bit of code so that the values in 0x0200 were changed.  I ran my lab 02 code again and noticed which bits were changing.  I picked the last byte that showed up in red and realized that it was the decoding of the second last byte in the original message.  This made me realize that the last byte was either not getting decoded or not stored.  
+
+To fix this, I decided to cut out the beginning of the message so that it was only three bytes long.  Then, I set a breakpoint at the top of the decryptMessage subroutine and skipped to the last iteration to step through it.  I realized that I placed my check if the last byte was present or not before I actually entered the decryptCharacter subroutine.  That means the last byte was never dealt with.  After the check was done, if the byte was the last byte the computer jumped to the end of the program.  Therefore, to fix this, I simply called the decryptCharacter again right before the end of the program.  This fixed everything and the basic functionality finally showed up correctly.  
+
+The following message was displayed:
 
 **Basic Functionality Answer**
 ```
