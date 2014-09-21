@@ -16,11 +16,18 @@ Before any coding was done in Code Composer Studio, a flow chart was made depict
 
 
 #Basic Functionality:
-In order to perform the basic functionality, the problem was broken down into smaller parts.  First, a few lines of code were created that were meant to pull the address of where the message, where the key was from memory, and where the answer will be written.  The key and the message were in ROM, which starts at 0xC000 and the answer was written in 0x0200.  For basic functionality this was easy because the key length was knew to be one, so these addresses could be hardcoded.  A launch was done to ensure that the program was receiving these numbers correctly.  It worked correctly.  
 
-Next, the subroutine decryptCharacter was created.  The whole point of this was to bring in a byte, XOR that byte with another byte, and then store the answer.  This was tested by hardcoding and moving/XORing byte into a register.  This was done for several cases just to make sure that the XORing process was working correctly.  It did work correctly. 
+**Extracting Addresses**
+In order to perform the basic functionality, the problem was broken down into smaller parts.  First, a few lines of code were created that were meant to pull the address of where the message, where the key was from memory, and where the answer will be written.  The key and the message were in ROM, which starts at 0xC000 and the answer was written in 0x0200.  For basic functionality this was easy because the key length was knew to be one, so the address for the beginning of the message was known to be 0xC001.  A launch was done to ensure that the program was receiving these numbers correctly.  It worked correctly.  
 
-Then the subroutine decryptMessage was created.  The point of this subroutine is to step through the message and send one byte at a time through the subroutine decryptCharacter.  Each iteration through decryptMessage calls decryptCharacter.  In order to test that decryptMessage was stepping through correctly, I had the subroutine only read from the location in memeory and rewrite the coded message into the answer location.  It did work correctly.  Also, a creative way to had to be determined for finding the end of the message.  It was noted that the basic message ended in 0x8f, and that byte was found no where else in the message.  Therefore, when this byte was found the end of the message was found.  I then tested the program again to make sure that it stopped at the correct place.  Then, instead of writing the original message to the answer location, the decryptCharacter subroutie was utilized to decode each bit.  To check the answer, the location 0x0200 was viewed and the data type changed to be "character".  The following message was displayed.  
+**DecryptCharacter**
+Next, the subroutine decryptCharacter was created.  The whole point of this was to bring in a byte, XOR that byte with another byte, and then store the answer.  This was tested by hardcoding and moving/XORing byte into a register.  This was done for several cases just to make sure that the XORing process was working correctly.  It did work correctly; I used this cite to make [sure](http://www.miniwebtool.com/bitwise-calculator/?data_type=16&number1=CB&number2=CA&operator=XOR).   
+
+**DecryptMessage**
+Then the subroutine decryptMessage was created.  The point of this subroutine is to step through the message and send one byte at a time through the subroutine decryptCharacter.  Each iteration through decryptMessage calls decryptCharacter.  In order to test that decryptMessage was stepping through correctly, I had the subroutine only read from the location in memeory and rewrite the coded message into the answer location.  It did work correctly.  
+
+**Finding End**
+Also, a creative way to had to be determined for finding the end of the message.  It was noted that the basic message ended in 0x8f, and that byte was found no where else in the message.  Therefore, when this byte was found the end of the message was found.  I then tested the program again to make sure that it stopped at the correct place.  Then, instead of writing the original message to the answer location, the decryptCharacter subroutine was utilized to decode each bit.  To check the answer, the location 0x0200 was viewed and the data type changed to be "character".  The following message was displayed.  
 
 
 **Basic Functionality Answer**
@@ -33,7 +40,10 @@ Then the subroutine decryptMessage was created.  The point of this subroutine is
 
 This is correct and therefore basic functionality was achieved.
 
-The code for this program may be seen [here](https://raw.githubusercontent.com/JohnTerragnoli/ECE382_Lab02/master/1.1main.asm).  
+The code for this program may be seen [here](https://raw.githubusercontent.com/JohnTerragnoli/ECE382_Lab02/master/1.1main.asm). 
+
+##Debugging: 
+I know that there doesn't seem to be a lot debugging in the section, however, the issues were broken down into such small parts that it was pretty difficult to make errors.  
 
 #B Functionality
 After this was done, B Functionality was achieved.  To do this, the program was supposed to work regardless of how long the key was.  Several changes were done with the code to ensure that it handled this new capability and that it was still backwards compatable with basic functionality.  
@@ -182,7 +192,11 @@ Based on these last three findings it looks like the trend it moving away from c
 Now we're in familiar territory!  With this first guess, I went no further because it looks like the answer.  Therefore, the key 0x73, 0x9E looks like it is the right key for the message.    
 
 
-
+#General Lessons Learned:
+1. You can start the program over from the beginning once you've run in it using the "restart" button.  
+2. You can fill the values in RAM and memory to be whatever you want while the program is running.  This way it is easier to see changes.  
+3. How to call subroutines and how to use the "ret" function to go right back to the place in the code where the subroutine is called once it is finished running.  
+4. Registers destroyed just means registers that will be used during the subroutine, so you cannot run it expecting that they will not change.  
 
 #Documentation: 
 Used this website to check if my [XORing](http://www.miniwebtool.com/bitwise-calculator/?data_type=16&number1=CB&number2=CA&operator=XOR) was correct.  This was done until I realized that the right answer actually spelled out an answer in characters.  
