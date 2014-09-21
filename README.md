@@ -199,6 +199,8 @@ Based on these last three findings it looks like the trend it moving away from c
 
 Now we're in familiar territory!  With this first guess, I went no further because it looks like the answer.  Therefore, the key 0x73, 0x9E looks like it is the right key for the message.    
 
+The final code for this project can be seen [here](https://raw.githubusercontent.com/JohnTerragnoli/ECE382_Lab02/master/1.1main.asm).  This includes all functionalities.  
+
 
 #General Lessons Learned:
 1. You can start the program over from the beginning once you've run in it using the "restart" button.  
