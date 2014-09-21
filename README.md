@@ -1,6 +1,8 @@
 ECE382_Lab02
 ============
 
+#Purpose:
+The purpose of this lab is to create an assembly code program that decodes bytes into a readable message given a message and a key.  Using a key, each byte of the coded message will be XORed with the key, or a part of the key, in order to find out the answer.  At first the key was only one byte long, but then the program was altered so that keys of arbirary length can be used.  The final code for this project can be seen [here]().  
 
 
 
