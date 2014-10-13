@@ -15,7 +15,7 @@ Before any coding was done in Code Composer Studio, a flow chart was made depict
 
 
 
-#Basic Functionality:
+#Basic Functionality: 
 
 **Extracting Addresses**
 In order to perform the basic functionality, the problem was broken down into smaller parts.  First, a few lines of code were created that were meant to pull the address of where the message, where the key was from memory, and where the answer will be written.  The key and the message were in ROM, which starts at 0xC000 and the answer was written in 0x0200.  For basic functionality this was easy because the key length was knew to be one, so the address for the beginning of the message was known to be 0xC001.  A launch was done to ensure that the program was receiving these numbers correctly.  It worked correctly.  
